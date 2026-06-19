@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CineSearch — Discover Movies</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="#" class="nav-logo" aria-label="CineSearch Home">
+            <div class="nav-logo-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5">
+                    <polygon points="23 7 16 12 23 17 23 7" />
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                </svg>
+            </div>
+            Cine<span>Search</span>
+        </a>
+        <div class="nav-search-wrap" role="search">
+            <svg class="nav-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" aria-hidden="true">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input class="nav-search-input" id="searchInput" type="search" placeholder="Search movies, series, actors…"
+                aria-label="Search movies" autocomplete="off" />
+            <button class="nav-search-clear" id="searchClear" aria-label="Clear search">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+        <div class="nav-pills" role="tablist" aria-label="Content type filter">
+            <button class="nav-pill active" data-type="all" role="tab" aria-selected="true">All</button>
+            <button class="nav-pill" data-type="movie" role="tab" aria-selected="false">Movies</button>
+            <button class="nav-pill" data-type="series" role="tab" aria-selected="false">Series</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="heroSection" aria-label="Featured movie">
+        <div class="hero-backdrop">
+            <img id="heroBg" class="hero-backdrop-img" alt="" aria-hidden="true" />
+            <div class="hero-gradient" aria-hidden="true"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge" id="heroType" aria-hidden="true">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3" />
+                </svg>
+                Now Playing
+            </div>
+            <h1 class="hero-title" id="heroTitle">Discover <span>Cinema</span><br />Like Never Before</h1>
+            <div class="hero-meta" id="heroMeta" aria-hidden="true"></div>
+            <p class="hero-plot" id="heroPlot">Search for any movie or series and explore millions of titles powered by
+                the OMDB database. Click on any card to see full details.</p>
+            <div class="hero-actions">
+                <button class="btn-watch" id="heroWatchBtn" onclick="openHeroModal()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                    View Details
+                </button>
+                <button class="btn-info" onclick="document.getElementById('searchInput').focus()">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        aria-hidden="true">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    Search Movies
+                </button>
+            </div>
+        </div>
+        <div class="hero-scroll-btns" aria-label="Browse featured movies">
+            <button class="hero-arrow" id="heroPrev" aria-label="Previous featured movie">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="15 18 9 12 15 6" />
+                </svg>
+            </button>
+            <button class="hero-arrow" id="heroNext" aria-label="Next featured movie">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <polyline points="9 18 15 12 9 6" />
+                </svg>
+            </button>
+        </div>
+        <div class="hero-dots" id="heroDots" role="tablist" aria-label="Featured movies"></div>
+    </section>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- CATEGORY BAR -->
+        <div class="category-bar" role="tablist" aria-label="Movie categories" id="categoryBar">
+            <button class="cat-btn active" data-query="avengers" role="tab" aria-selected="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                Popular
+            </button>
+            <button class="cat-btn" data-query="action" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+                Action
+            </button>
+            <button class="cat-btn" data-query="comedy" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M8 13s1.5 2 4 2 4-2 4-2" />
+                    <line x1="9" y1="9" x2="9.01" y2="9" />
+                    <line x1="15" y1="9" x2="15.01" y2="9" />
+                </svg>
+                Comedy
+            </button>
+            <button class="cat-btn" data-query="horror" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+                Horror
+            </button>
+            <button class="cat-btn" data-query="sci-fi" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                Sci-Fi
+            </button>
+            <button class="cat-btn" data-query="drama" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                Drama
+            </button>
+            <button class="cat-btn" data-query="animation" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                    <line x1="8" y1="21" x2="16" y2="21" />
+                    <line x1="12" y1="17" x2="12" y2="21" />
+                </svg>
+                Animation
+            </button>
+            <button class="cat-btn" data-query="thriller" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                </svg>
+                Thriller
+            </button>
+            <button class="cat-btn" data-query="batman" role="tab" aria-selected="false">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                DC / Marvel
+            </button>
+        </div>
+
+        <!-- MOVIES SECTION -->
+        <div class="movies-section">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <span class="section-title-bar" aria-hidden="true"></span>
+                    <span id="sectionTitleText">Popular Movies</span>
+                </h2>
+                <span class="results-count" id="resultsCount" aria-live="polite"></span>
+            </div>
+            <div class="movies-grid" id="moviesGrid" role="list" aria-label="Movies list"></div>
+            <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+                <button class="btn-load-more" id="loadMoreBtn" onclick="loadMore()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="23 4 23 10 17 10" />
+                        <polyline points="1 20 1 14 7 14" />
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                    </svg>
+                    Load More
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal" id="modal">
+            <div class="modal-hero">
+                <img id="modalBg" class="modal-backdrop-img" alt="" aria-hidden="true" />
+                <div class="modal-hero-gradient" aria-hidden="true"></div>
+                <button class="modal-close" id="modalClose" aria-label="Close details">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+                <div class="modal-poster-inline" aria-hidden="true">
+                    <img id="modalPosterSmall" alt="" />
+                </div>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <div class="modal-meta" id="modalMeta"></div>
+                <div class="modal-genre-tags" id="modalGenres"></div>
+                <p class="modal-plot" id="modalPlot"></p>
+                <div class="modal-details-grid" id="modalDetails"></div>
+                <div class="modal-actions">
+                    <button class="modal-btn-primary" onclick="toggleWatchlist(currentMovieId)">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+                        </svg>
+                        <span id="watchlistBtnText">Add to Watchlist</span>
+                    </button>
+                    <button class="modal-btn-secondary" onclick="shareMovie()">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5">
+                            <circle cx="18" cy="5" r="3" />
+                            <circle cx="6" cy="12" r="3" />
+                            <circle cx="18" cy="19" r="3" />
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                        </svg>
+                        Share
+                    </button>
+                </div>
+                <div class="ratings-section" id="ratingsSection"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">Cine<span>Search</span></div>
+        <p class="footer-copy">© 2025 CineSearch. For educational purposes.</p>
+        <div class="footer-powered">Powered by <a href="https://www.omdbapi.com" target="_blank" rel="noopener">OMDB
+                API</a></div>
+        <p>Developed my Rinu Pun</p>
+    </footer>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
